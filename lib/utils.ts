@@ -20,6 +20,12 @@ type Student = {
   gender: "M" | "F";
 };
 
+type Enrollment = {
+  id: number;
+  student_id: number;
+  course_id: number;
+}
+
 export const getSeedCourses = () => {
   return [
     { id: 1, code: "FLOR101", name: "จัดดอกไม้เพื่ออาชีพ" },
@@ -66,7 +72,7 @@ export const getSeedStudents = (size: number = 50) => {
     id: 999,
     first_name: "พิเศษ",
     last_name: "นักเรียน",
-    gov_id: "1234567890123",
+    gov_id: "12345678901",
     gender: "M",
   };
 
@@ -78,7 +84,8 @@ export const getSeedEnrollments = (
   students: Student[],
   coursesOfferings: Offering[]
 ) => {
-  const enrollments = [];
+  const enrollments: Enrollment[] = [];
+  let enrollmentsId = 1;
 
   [1, 2].forEach((termId) => {
     const termOfferings = coursesOfferings.filter(
@@ -94,13 +101,14 @@ export const getSeedEnrollments = (
         selectedStudents.add(randomStudent.id);
 
         enrollments.push({
+          id: enrollmentsId++,
           student_id: randomStudent.id,
-          offering_id: offering.id,
-          term_id: termId,
+          course_id: offering.course_id,
         });
       }
     })
   });
+  return enrollments;
 };
 
 export const getSeedAcademicYears = () => {
@@ -195,5 +203,3 @@ export const getSeedCourseForTerm = (allCourses: Course[], count: number) => {
   const courses = allCourses.map((course) => course.id);
   return faker.helpers.arrayElements(courses, count);
 };
-
-console.log(getSeedCourseOfferings());

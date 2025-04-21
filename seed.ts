@@ -5,7 +5,7 @@
  * Learn more about the Seed Client by following our guide: https://docs.snaplet.dev/seed/getting-started
  */
 import { createSeedClient } from "@snaplet/seed";
-import { getSeedCourses, getSeedEnrollments, getSeedStudents } from "./lib/utils";
+import { getSeedAcademicYears, getSeedCourseOfferings, getSeedCourses, getSeedEnrollments, getSeedStudents, getSeedTerms } from "./lib/utils";
 
 const seed = await createSeedClient({ dryRun: true });
 
@@ -23,12 +23,22 @@ const main = async () => {
 
 const seedDb = async () => {
   const courses = getSeedCourses();
+
+  const students = getSeedStudents(49);
+
+  const academicYears = getSeedAcademicYears();
+
+  const terms = getSeedTerms();
+
+  const courseOfferings = getSeedCourseOfferings();
+
+  const enrollments = getSeedEnrollments(students, courseOfferings);
+
   await seed.course(courses);
-
-  const students = getSeedStudents();
   await seed.student(students);
-
-  const enrollments = getSeedEnrollments(students.length, courses.length);
+  await seed.academic_year(academicYears);
+  await seed.term(terms);
+  await seed.course_offering(courseOfferings);
   await seed.enrollment(enrollments);
 };
 
