@@ -132,28 +132,28 @@ export const getSeedTerms = () => {
   return [
     {
       id: 1,
-      term_label: "1/2024",
+      term_name: "1/2024",
       start_date: "2024-05-01",
       end_date: "2024-9-31",
       academic_year_id: 1,
     },
     {
       id: 2,
-      term_label: "2/2024",
+      term_name: "2/2024",
       start_date: "2024-11-01",
       end_date: "2025-3-31",
       academic_year_id: 1,
     },
     {
       id: 3,
-      term_label: "1/2025",
+      term_name: "1/2025",
       start_date: "2025-05-01",
       end_date: "2025-9-31",
       academic_year_id: 2,
     },
     {
       id: 4,
-      term_label: "2/2025",
+      term_name: "2/2025",
       start_date: "2025-11-01",
       end_date: "2026-3-31",
       academic_year_id: 2,
